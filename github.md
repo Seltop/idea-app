@@ -1,4 +1,4 @@
-repo: Seltop/idea-app
+repo: Seltop/Matzpen
 branch: main
 
 ## Last sync

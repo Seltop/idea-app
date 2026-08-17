@@ -37,6 +37,13 @@ a{color:#2A6B44;text-decoration:none}a:hover{color:#1D4E31}
 @keyframes qOut{0%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(-16px)}}
 @keyframes qIn{0%{opacity:0;transform:translateY(20px)}100%{opacity:1;transform:none}}
 @keyframes riseIn{0%{opacity:0;transform:translateY(86px) scale(.98)}38%{opacity:.75}100%{opacity:1;transform:none}}
+@keyframes rowIn{0%{opacity:0;transform:translateY(14px)}100%{opacity:1;transform:none}}
+@keyframes sheetIn{0%{opacity:0;transform:translateY(100%)}100%{opacity:1;transform:none}}
+@keyframes menuIn{0%{opacity:0;transform:translateY(-6px) scale(.97)}100%{opacity:1;transform:none}}
+@keyframes headerIn{0%{opacity:0;transform:translateY(-14px)}100%{opacity:1;transform:none}}
+@keyframes cardIn{0%{opacity:0;transform:translateY(18px)}100%{opacity:1;transform:none}}
+@keyframes dotPop{0%{transform:scale(1)}35%{transform:scale(1.55)}70%{transform:scale(.92)}100%{transform:scale(1)}}
+@keyframes labelPop{0%{opacity:0;transform:translateY(5px)}100%{opacity:1;transform:none}}
 </style>
 </helmet>
 <div dir="rtl" lang="he" style="min-height:100vh;display:flex;flex-direction:column;background:#F5F3EA">
@@ -97,15 +104,12 @@ a{color:#2A6B44;text-decoration:none}a:hover{color:#1D4E31}
         <span style="font-weight:700;font-size:17px;letter-spacing:.06em">שה"ד</span>
       </div>
       <div style="position:relative">
-        <button onClick="{{ toggleCats }}" style="display:flex;align-items:center;gap:8px;background:#FFFFFF;border:1.5px solid {{ catsBorder }};border-radius:999px;padding:9px 18px;font-family:inherit;font-size:13px;font-weight:600;color:#263029;cursor:pointer;transition:border-color .15s" style-hover="border-color:#2A6B44">מה היחידה מייצרת?<span style="color:#2A6B44;font-size:11px">{{ catsArrow }}</span></button>
+        <button onClick="{{ toggleCats }}" style="display:flex;align-items:center;gap:8px;background:#FFFFFF;border:1.5px solid {{ catsBorder }};border-radius:999px;padding:9px 18px;font-family:inherit;font-size:13px;font-weight:600;color:#263029;cursor:pointer;transition:border-color .15s" style-hover="border-color:#2A6B44">מי אנחנו?<span style="color:#2A6B44;font-size:11px">{{ catsArrow }}</span></button>
         <sc-if value="{{ catsOpen }}" hint-placeholder-val="{{ false }}">
-          <div style="position:absolute;top:52px;left:0;width:270px;background:#FFFFFF;border:1.5px solid rgba(23,35,26,.12);border-radius:14px;padding:10px;box-shadow:0 12px 30px rgba(23,35,26,.13);z-index:5;animation:fadeUp .22s ease both">
-            <sc-for list="{{ cats }}" as="cat" hint-placeholder-count="8">
-              <div style="padding:9px 12px;border-radius:9px;display:flex;flex-direction:column;gap:2px">
-                <span style="font-size:14px;font-weight:700;color:#17231A">{{ cat.name }}</span>
-                <span style="font-size:12px;line-height:1.45;color:#7C877E">{{ cat.examples }}</span>
-              </div>
-            </sc-for>
+          <div style="position:absolute;top:52px;left:0;width:min(320px,calc(100vw - 36px));box-sizing:border-box;background:#FFFFFF;border:1.5px solid rgba(23,35,26,.12);border-radius:14px;padding:20px 22px;box-shadow:0 12px 30px rgba(23,35,26,.13);z-index:5;animation:fadeUp .22s ease both;text-align:right">
+            <div style="font-size:15px;font-weight:700;color:#17231A;margin-bottom:8px">שה"ד</div>
+            <p style="margin:0;font-size:13.5px;line-height:1.65;color:#4E5B51">אנחנו היחידה שמתרגמת צרכים למוצרים. מגיעים אלינו עם בעיה או צורך, ויוצאים עם פתרון בנוי.</p>
+            <p style="margin:12px 0 0;font-size:13.5px;line-height:1.65;color:#4E5B51">לא צריך לדעת מה לבקש. ענו על כמה שאלות על הצורך, ואנחנו נחזור אליכם עם המלצה.</p>
           </div>
         </sc-if>
       </div>
@@ -120,7 +124,7 @@ a{color:#2A6B44;text-decoration:none}a:hover{color:#1D4E31}
       <div style="position:relative;display:flex;flex-direction:column;align-items:center;animation: {{ launchContent }}">
         <h1 style="margin:0;font-size:clamp(38px,6.4vw,70px);font-weight:700;line-height:1.08;max-width:14ch;text-wrap:balance;letter-spacing:-.02em">מה הפתרון <span style="position:relative;display:inline-block;color:#2A6B44">בשבילכם?<span style="position:absolute;right:0;left:0;bottom:-.02em;height:.1em;border-radius:99px;background:#FAE3A0;transform-origin:right;animation:underline .7s .45s ease both;display:block"></span></span></h1>
         <p style="margin:24px 0 0;font-size:18px;line-height:1.65;color:#4E5B51;max-width:42ch;font-weight:400;text-wrap:pretty">מה מפריע? תארו את הצורך, ואנחנו נמציא את הפתרון.</p>
-        <button onClick="{{ start }}" style="margin-top:38px;padding:18px 52px;font-size:17px;font-weight:700;font-family:inherit;background:#17231A;color:#F5F3EA;border:none;border-radius:999px;cursor:pointer;transition:transform .15s,background .15s;box-shadow:0 4px 0 #2A6B44" style-hover="background:#2A6B44;transform:translateY(-2px)">בואו נתחיל ←</button>
+        <button onClick="{{ start }}" style="margin-top:38px;padding:18px 52px;font-size:17px;font-weight:700;font-family:inherit;background:#1D4E31;color:#F5F3EA;border:none;border-radius:999px;cursor:pointer;transition:transform .15s,background .15s,box-shadow .15s;box-shadow:0 4px 0 #17231A" style-hover="background:#2A6B44;transform:translateY(-2px);box-shadow:0 6px 0 #17231A" style-active="transform:translateY(2px);box-shadow:0 1px 0 #17231A">בואו נתחיל ←</button>
         <div style="margin-top:18px;font-size:13px;font-weight:500;color:#7C877E">2 עד 3 דקות · בלי טפסים ארוכים</div>
       </div>
     </main>
@@ -144,10 +148,10 @@ a{color:#2A6B44;text-decoration:none}a:hover{color:#1D4E31}
         <path fill="none" stroke="#D3DCD3" stroke-width="3" stroke-linecap="round" d="{{ waveD }}">
           <animate attributeName="d" dur="9s" repeatCount="indefinite" values="{{ waveVals }}"></animate>
         </path>
-        <path fill="none" stroke="#FAE3A0" stroke-width="2" stroke-linecap="round" pathLength="100" stroke-dasharray="100" stroke-dashoffset="{{ doneOffset }}" style="transition:stroke-dashoffset .62s cubic-bezier(.4,.8,.3,1)" d="{{ ghostD }}">
+        <path fill="none" stroke="#FAE3A0" stroke-width="2" stroke-linecap="round" pathLength="100" stroke-dasharray="100" stroke-dashoffset="{{ doneOffset }}" style="transition:stroke-dashoffset .42s cubic-bezier(.16,.86,.3,1)" d="{{ ghostD }}">
           <animate attributeName="d" dur="9s" repeatCount="indefinite" values="{{ ghostVals }}"></animate>
         </path>
-        <path fill="none" stroke="#2A6B44" stroke-width="3.5" stroke-linecap="round" pathLength="100" stroke-dasharray="100" stroke-dashoffset="{{ doneOffset }}" style="transition:stroke-dashoffset .62s cubic-bezier(.4,.8,.3,1)" d="{{ waveD }}">
+        <path fill="none" stroke="#2A6B44" stroke-width="3.5" stroke-linecap="round" pathLength="100" stroke-dasharray="100" stroke-dashoffset="{{ doneOffset }}" style="transition:stroke-dashoffset .42s cubic-bezier(.16,.86,.3,1)" d="{{ waveD }}">
           <animate attributeName="d" dur="9s" repeatCount="indefinite" values="{{ waveVals }}"></animate>
         </path>
         <sc-for list="{{ checkpoints }}" as="cp" hint-placeholder-count="9">
@@ -156,7 +160,7 @@ a{color:#2A6B44;text-decoration:none}a:hover{color:#1D4E31}
           </circle>
         </sc-for>
         <g transform="translate({{ planeX }},0)">
-          <animateTransform ref="{{ flightRef }}" attributeName="transform" type="translate" dur="0.62s" fill="freeze" calcMode="spline" keySplines="0.45 0.05 0.25 1" keyTimes="0;1" begin="indefinite" values="{{ flightValues }}"></animateTransform>
+          <animateTransform ref="{{ flightRef }}" attributeName="transform" type="translate" dur="0.42s" fill="freeze" calcMode="spline" keySplines="0.16 0.86 0.3 1" keyTimes="0;1" begin="indefinite" values="{{ flightValues }}"></animateTransform>
           <g transform="translate(0,{{ planeY }})">
             <animateTransform attributeName="transform" type="translate" dur="9s" repeatCount="indefinite" values="{{ planeBob }}"></animateTransform>
             <g transform="scale(0.062,0.062)">
@@ -215,32 +219,62 @@ a{color:#2A6B44;text-decoration:none}a:hover{color:#1D4E31}
             <span style="flex:none;width:26px;height:26px;border-radius:9px;background: {{ dateOptChipBg }};color: {{ dateOptChipColor }};display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600">{{ dateOptChip }}</span>
             <span style="font-size:15.5px;font-weight:500;color:#17231A">{{ dateOptLabel }}</span>
           </button>
-          <input type="date" value="{{ dateVal }}" onChange="{{ setDate }}" style="margin-inline-start:auto;padding:11px 14px;font-family:inherit;font-size:15px;font-weight:600;border:1.5px solid {{ dateInputBorder }};border-radius:9px;background:#FFFFFF;outline:none;color:#17231A;box-sizing:border-box">
-          <span style="font-size:13.5px;font-weight:500;color: {{ dateNoteColor }}">{{ dateNote }}</span>
+          <div style="margin-inline-start:auto;position:relative">
+            <button onClick="{{ toggleCal }}" style="display:flex;align-items:center;gap:9px;padding:11px 16px;font-family:inherit;font-size:15px;font-weight:600;border:1.5px solid {{ dateInputBorder }};border-radius:9px;background:#FFFFFF;color: {{ dateBtnColor }};cursor:pointer;box-sizing:border-box;transition:border-color .15s" style-hover="border-color:#2A6B44">{{ dateBtnLabel }}<span style="font-size:15px;color:#2A6B44">☷</span></button>
+            <sc-if value="{{ calOpen }}" hint-placeholder-val="{{ false }}">
+              <div style="position: {{ calWrapPos }};inset: {{ calWrapInset }};z-index:40;display:flex;align-items: {{ calWrapAlign }};justify-content:center;background: {{ calBackdrop }};padding: {{ calWrapPad }};box-sizing:border-box" onClick="{{ calBackdropClick }}">
+              <div onClick="{{ stopProp }}" style="position:relative;width: {{ calW }};max-width:340px;box-sizing:border-box;background:#FFFFFF;border:1.5px solid rgba(23,35,26,.12);border-radius:16px;padding: {{ calPad }};box-shadow:0 14px 34px rgba(23,35,26,.18);animation: {{ calAnim }}">
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:12px">
+                  <button onClick="{{ calPrev }}" title="חודש קודם" style="width:38px;height:38px;border-radius:8px;border:1.5px solid rgba(23,35,26,.14);background:#FFFFFF;color: {{ calPrevColor }};font-size:14px;cursor: {{ calPrevCursor }};font-family:inherit;padding:0;transition:border-color .15s" style-hover="border-color:#2A6B44">›</button>
+                  <span style="font-size:14.5px;font-weight:700;color:#17231A">{{ calTitle }}</span>
+                  <button onClick="{{ calNext }}" title="חודש הבא" style="width:38px;height:38px;border-radius:8px;border:1.5px solid rgba(23,35,26,.14);background:#FFFFFF;color:#263029;font-size:14px;cursor:pointer;font-family:inherit;padding:0;transition:border-color .15s" style-hover="border-color:#2A6B44">‹</button>
+                </div>
+                <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-bottom:5px">
+                  <sc-for list="{{ calDows }}" as="dw" hint-placeholder-count="7">
+                    <div style="text-align:center;font-size:11px;font-weight:700;color:#9AA69B;padding:4px 0">{{ dw }}</div>
+                  </sc-for>
+                </div>
+                <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:3px">
+                  <sc-for list="{{ calCells }}" as="cell" hint-placeholder-count="35">
+                    <button onClick="{{ cell.pick }}" style="height: {{ cellH }};border-radius:9px;border:1.5px solid {{ cell.border }};background: {{ cell.bg }};color: {{ cell.color }};font-family:inherit;font-size: {{ cellFs }};font-weight: {{ cell.weight }};cursor: {{ cell.cursor }};padding:0;transition:background .15s,border-color .15s,color .15s" style-hover="{{ cell.hover }}">{{ cell.label }}</button>
+                  </sc-for>
+                </div>
+                <div style="display:flex;gap:8px;margin-top:12px">
+                  <sc-if value="{{ calHasPick }}" hint-placeholder-val="{{ false }}">
+                    <button onClick="{{ calClear }}" style="flex:1;padding:12px;border-radius:9px;border:1.5px solid rgba(23,35,26,.14);background:#FFFFFF;color:#4E5B51;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;transition:border-color .15s,color .15s" style-hover="border-color:#A8341A;color:#A8341A">ניקוי</button>
+                  </sc-if>
+                  <button onClick="{{ toggleCal }}" style="flex:2;padding:12px;border-radius:9px;border:1.5px solid rgba(23,35,26,.14);background:#FFFFFF;color:#263029;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;transition:border-color .15s" style-hover="border-color:#2A6B44">סגירה</button>
+                </div>
+              </div>
+              </div>
+            </sc-if>
+          </div>
+          <span style="font-size:13.5px;font-weight:500;color: {{ dateNoteColor }};flex-basis:100%">{{ dateNote }}</span>
         </div>
       </sc-if>
       <div style="display:flex;justify-content:space-between;align-items:center;margin-top:28px;gap:12px">
         <button onClick="{{ goBack }}" style="padding:13px 26px;font-size:14px;font-weight:600;font-family:inherit;background:transparent;color: {{ backColor }};border:2px solid rgba(23,35,26,.14);border-radius:999px;cursor: {{ backCursor }}" style-hover="border-color:rgba(23,35,26,.4)">→ חזרה</button>
-        <button onClick="{{ goNext }}" style="padding:16px 54px;font-size:16px;font-weight:700;font-family:inherit;background: {{ nextBg }};color:#F5F3EA;border:none;border-radius:999px;cursor: {{ nextCursor }};transition:transform .15s,background .15s;box-shadow: {{ nextShadow }}" style-hover="transform:translateY(-2px)">{{ nextLabel }}</button>
+        <button onClick="{{ goNext }}" style="padding:16px 54px;font-size:16px;font-weight:700;font-family:inherit;background: {{ nextBg }};color:#F5F3EA;border:none;border-radius:999px;cursor: {{ nextCursor }};transition:transform .15s,background .15s,box-shadow .15s;box-shadow: {{ nextShadow }}" style-hover="transform:translateY(-2px)" style-active="transform:translateY(2px)">{{ nextLabel }}</button>
       </div>
     </main>
   </div>
 </sc-if>
 <sc-if value="{{ isDetails }}" hint-placeholder-val="{{ false }}">
   <div style="flex:1;min-height:100vh;display:flex;flex-direction:column">
-    <header style="padding:22px 40px;display:flex;align-items:center;gap:10px"><img src="assets/shahad-logo-192.png" alt="סמל שה''ד" style="width:34px;height:34px;object-fit:contain;display:block"><span style="font-weight:700;font-size:14px;letter-spacing:.05em">שה"ד</span></header>
-    <main style="flex:1;display:flex;align-items:center;justify-content:center;padding:24px">
-      <div style="width:100%;max-width:560px;background:#FFFFFF;border:1px solid rgba(23,35,26,.1);border-radius:10px;padding:36px 34px;animation:fadeUp .4s ease both;box-sizing:border-box">
-        <h2 style="margin:0;font-size:26px;font-weight:700">כמעט סיימנו, נשאר רק איש קשר</h2>
+    <header style="padding:22px clamp(18px,5vw,40px);display:flex;align-items:center;gap:10px"><img src="assets/shahad-logo-192.png" alt="סמל שה''ד" style="width:34px;height:34px;object-fit:contain;display:block"><span style="font-weight:700;font-size:14px;letter-spacing:.05em">שה"ד</span></header>
+    <main style="flex:1;display:flex;align-items:center;justify-content:center;padding:16px 14px 32px">
+      <div style="width:100%;max-width:560px;background:#FFFFFF;border:1px solid rgba(23,35,26,.1);border-radius:10px;padding:clamp(22px,5vw,36px) clamp(18px,5vw,34px);animation:fadeUp .4s ease both;box-sizing:border-box">
+        <h2 style="margin:0;font-size:clamp(21px,5.4vw,26px);font-weight:700;text-wrap:balance">כמעט סיימנו, נשאר רק איש קשר</h2>
         <p style="margin:10px 0 24px;font-size:14.5px;line-height:1.6;color:#4E5B51">תיארתם את הצורך. השאירו פרטים כדי שנוכל לחזור אליכם עם מענה.</p>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
-          <label style="display:flex;flex-direction:column;gap:6px;font-size:12.5px;font-weight:600;color:#263029;grid-column:1/-1">שם מלא *<input value="{{ formName }}" onChange="{{ setName }}" style="padding:12px 14px;font-family:inherit;font-size:14px;border:1.5px solid {{ nameBorder }};border-radius:5px;background:#FBFCFA;outline:none;box-sizing:border-box"></label>
-          <label style="display:flex;flex-direction:column;gap:6px;font-size:12.5px;font-weight:600;color:#263029">תפקיד<input value="{{ formRole }}" onChange="{{ setRole }}" style="padding:12px 14px;font-family:inherit;font-size:14px;border:1.5px solid rgba(23,35,26,.15);border-radius:5px;background:#FBFCFA;outline:none;box-sizing:border-box"></label>
-          <label style="display:flex;flex-direction:column;gap:6px;font-size:12.5px;font-weight:600;color:#263029">צוות או יחידה<input value="{{ formTeam }}" onChange="{{ setTeam }}" style="padding:12px 14px;font-family:inherit;font-size:14px;border:1.5px solid rgba(23,35,26,.15);border-radius:5px;background:#FBFCFA;outline:none;box-sizing:border-box"></label>
-          <label style="display:flex;flex-direction:column;gap:6px;font-size:12.5px;font-weight:600;color:#263029;grid-column:1/-1">טלפון<input value="{{ formPhone }}" onChange="{{ setPhone }}" style="padding:12px 14px;font-family:inherit;font-size:14px;border:1.5px solid rgba(23,35,26,.15);border-radius:5px;background:#FBFCFA;outline:none;box-sizing:border-box;direction:rtl"></label>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px">
+          <label style="display:flex;flex-direction:column;gap:6px;font-size:12.5px;font-weight:600;color:#263029;grid-column:1/-1">שם מלא *<input value="{{ formName }}" onChange="{{ setName }}" autoComplete="name" style="padding:14px;font-family:inherit;font-size:16px;border:1.5px solid {{ nameBorder }};border-radius:5px;background:#FBFCFA;outline:none;box-sizing:border-box;width:100%;min-width:0"></label>
+          <label style="display:flex;flex-direction:column;gap:6px;font-size:12.5px;font-weight:600;color:#263029">תפקיד<input value="{{ formRole }}" onChange="{{ setRole }}" style="padding:14px;font-family:inherit;font-size:16px;border:1.5px solid rgba(23,35,26,.15);border-radius:5px;background:#FBFCFA;outline:none;box-sizing:border-box;width:100%;min-width:0"></label>
+          <label style="display:flex;flex-direction:column;gap:6px;font-size:12.5px;font-weight:600;color:#263029">צוות או יחידה<input value="{{ formTeam }}" onChange="{{ setTeam }}" style="padding:14px;font-family:inherit;font-size:16px;border:1.5px solid rgba(23,35,26,.15);border-radius:5px;background:#FBFCFA;outline:none;box-sizing:border-box;width:100%;min-width:0"></label>
+          <label style="display:flex;flex-direction:column;gap:6px;font-size:12.5px;font-weight:600;color:#263029">טלפון<input type="tel" inputMode="tel" autoComplete="tel" value="{{ formPhone }}" onChange="{{ setPhone }}" style="padding:14px;font-family:inherit;font-size:16px;border:1.5px solid rgba(23,35,26,.15);border-radius:5px;background:#FBFCFA;outline:none;box-sizing:border-box;width:100%;min-width:0;direction:ltr;text-align:right"></label>
+          <label style="display:flex;flex-direction:column;gap:6px;font-size:12.5px;font-weight:600;color:#263029">אבנט<input type="tel" inputMode="tel" value="{{ formAvnet }}" onChange="{{ setAvnet }}" style="padding:14px;font-family:inherit;font-size:16px;border:1.5px solid rgba(23,35,26,.15);border-radius:5px;background:#FBFCFA;outline:none;box-sizing:border-box;width:100%;min-width:0;direction:ltr;text-align:right"></label>
         </div>
         <sc-if value="{{ formErr }}" hint-placeholder-val="{{ false }}"><div style="margin-top:12px;font-size:13px;color:#A8341A">נא למלא שם מלא לפני השליחה.</div></sc-if>
-        <button onClick="{{ submit }}" style="margin-top:22px;width:100%;padding:16px;font-size:15.5px;font-weight:600;font-family:inherit;background:#17231A;color:#F5F3EA;border:none;border-radius:5px;cursor:pointer;transition:background .15s" style-hover="background:#2A6B44">שליחת הבקשה ליחידה</button>
+        <button onClick="{{ submit }}" style="margin-top:22px;width:100%;padding:16px;font-size:15.5px;font-weight:600;font-family:inherit;background:#1D4E31;color:#F5F3EA;border:none;border-radius:5px;cursor:pointer;transition:background .15s,box-shadow .15s,transform .15s;box-shadow:0 4px 0 #17231A" style-hover="background:#2A6B44;box-shadow:0 6px 0 #17231A;transform:translateY(-2px)" style-active="transform:translateY(2px);box-shadow:0 1px 0 #17231A">שליחת הבקשה ליחידה</button>
       </div>
     </main>
   </div>
@@ -263,46 +297,46 @@ a{color:#2A6B44;text-decoration:none}a:hover{color:#1D4E31}
       </div>
       <button onClick="{{ exitAdmin }}" style="background:none;border:1px solid rgba(245,243,234,.3);border-radius:4px;color:#F5F3EA;font-family:inherit;font-size:12.5px;padding:8px 16px;cursor:pointer" style-hover="border-color:#F2C744;color:#F2C744">יציאה לאתר</button>
     </header>
-    <main style="max-width:1000px;margin:0 auto;padding:32px 24px 90px;animation:fadeUp .4s ease both">
-      <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:18px">
+    <main style="max-width:1000px;margin:0 auto;padding:32px 24px 90px">
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:14px;animation:headerIn .42s cubic-bezier(.22,.9,.28,1) both">
         <h2 style="margin:0;font-size:26px;font-weight:700">תור העבודה</h2>
-        <div style="display:flex;gap:16px;font-size:13px;font-weight:500;color:#4E5B51">
-          <span>פתוחות {{ statOpen }}</span><span style="color:#2A6B44">חדשות {{ statNew }}</span><span>נענו {{ statDone }}</span><span style="color:#7C877E">בארכיון {{ statArchived }}</span>
+        <div style="position:relative;flex:1;min-width:240px;max-width:420px;margin-inline-start:auto">
+          <input value="{{ search }}" onChange="{{ setSearch }}" placeholder="חיפוש בשם, צוות, מספר בקשה או תוכן" style="width:100%;padding:11px 40px 11px 16px;font-family:inherit;font-size:14px;border:1.5px solid {{ searchBorder }};border-radius:999px;background:#FFFFFF;outline:none;box-sizing:border-box">
+          <button onClick="{{ clearSearch }}" title="ניקוי חיפוש" style="position:absolute;inset-inline-end:6px;top:50%;transform:translateY(-50%);display: {{ clearSearchDisplay }};width:26px;height:26px;border-radius:50%;border:none;background:rgba(23,35,26,.06);color:#4E5B51;font-size:13px;line-height:1;cursor:pointer;font-family:inherit;padding:0" style-hover="background:rgba(23,35,26,.12)">×</button>
         </div>
       </div>
-      <div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:14px">
-        <input value="{{ search }}" onChange="{{ setSearch }}" placeholder="חיפוש לפי שם, צוות, מספר בקשה או פתרון…" style="flex:1;min-width:240px;padding:11px 14px;font-family:inherit;font-size:14px;border:1.5px solid rgba(23,35,26,.13);border-radius:6px;background:#FFFFFF;outline:none;box-sizing:border-box">
-        <div style="display:flex;gap:6px;flex-wrap:wrap">
-          <sc-for list="{{ filters }}" as="f" hint-placeholder-count="5">
-            <button onClick="{{ f.set }}" style="font-family:inherit;font-size:12.5px;font-weight:600;padding:9px 15px;border-radius:999px;cursor:pointer;background: {{ f.bg }};color: {{ f.color }};border:1.5px solid {{ f.border }}">{{ f.label }}</button>
-          </sc-for>
-        </div>
-      </div>
-      <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:12px 14px;background:#FFFFFF;border:1px solid rgba(23,35,26,.09);border-radius:8px;margin-bottom:18px">
-        <button onClick="{{ exportJson }}" style="font-family:inherit;font-size:12.5px;font-weight:600;padding:8px 14px;border-radius:5px;cursor:pointer;background:transparent;color:#263029;border:1.5px solid rgba(23,35,26,.15)" style-hover="border-color:#2A6B44;color:#2A6B44">ייצוא JSON</button>
-        <button onClick="{{ exportCsv }}" style="font-family:inherit;font-size:12.5px;font-weight:600;padding:8px 14px;border-radius:5px;cursor:pointer;background:transparent;color:#263029;border:1.5px solid rgba(23,35,26,.15)" style-hover="border-color:#2A6B44;color:#2A6B44">ייצוא CSV</button>
-        <label style="font-family:inherit;font-size:12.5px;font-weight:600;padding:8px 14px;border-radius:5px;cursor:pointer;background:transparent;color:#263029;border:1.5px solid rgba(23,35,26,.15);display:inline-flex;align-items:center" style-hover="border-color:#2A6B44;color:#2A6B44">ייבוא מקובץ<input type="file" accept="application/json,.json" onChange="{{ importFile }}" style="display:none"></label>
-        <button onClick="{{ seedDemo }}" style="font-family:inherit;font-size:12.5px;font-weight:600;padding:8px 14px;border-radius:5px;cursor:pointer;background:transparent;color:#263029;border:1.5px solid rgba(23,35,26,.15)" style-hover="border-color:#2A6B44;color:#2A6B44">נתוני דמו</button>
-        <span style="margin-inline-start:auto;font-size:12.5px;font-weight:500;color: {{ dbNoteColor }}">{{ dbNote }}</span>
+      <div style="position:relative;z-index:40;display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:8px;animation:fadeUp .42s cubic-bezier(.22,.9,.28,1) .07s both">
+        <sc-for list="{{ menus }}" as="mn" hint-placeholder-count="4">
+          <div style="position:relative">
+            <button onClick="{{ mn.toggle }}" style="display:flex;align-items:center;gap:8px;font-family:inherit;font-size:13px;font-weight:600;padding:9px 14px;border-radius:999px;cursor:pointer;background: {{ mn.bg }};color: {{ mn.color }};border:1.5px solid {{ mn.border }};transition:background .2s,color .2s,border-color .2s" style-hover="border-color:#2A6B44"><span style="font-weight:500;color: {{ mn.capColor }}">{{ mn.caption }}</span>{{ mn.value }}<span style="font-size:9px;opacity:.6">{{ mn.arrow }}</span></button>
+            <sc-if value="{{ mn.open }}" hint-placeholder-val="{{ false }}">
+              <div style="position:absolute;top:calc(100% + 6px);inset-inline-start:0;z-index:60;min-width:210px;max-height:320px;overflow:auto;background:#FFFFFF;border:1.5px solid rgba(23,35,26,.12);border-radius:10px;padding:6px;box-shadow:0 12px 28px rgba(23,35,26,.14);display:flex;flex-direction:column;gap:2px;transform-origin:top;animation:menuIn .2s cubic-bezier(.22,.9,.28,1) both">
+                <sc-for list="{{ mn.items }}" as="it" hint-placeholder-count="4">
+                  <button onClick="{{ it.set }}" style="display:flex;align-items:center;justify-content:space-between;gap:14px;width:100%;font-family:inherit;font-size:13.5px;font-weight: {{ it.weight }};padding:9px 12px;border-radius:6px;cursor:pointer;background: {{ it.bg }};color: {{ it.color }};border:none;text-align:right;transition:background .15s" style-hover="background:#F0F6F1">{{ it.label }}<span style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;opacity:.7">{{ it.count }}</span></button>
+                </sc-for>
+              </div>
+            </sc-if>
+          </div>
+        </sc-for>
+        <button onClick="{{ clearFilters }}" style="display: {{ clearAllDisplay }};background:none;border:none;padding:6px 4px;font-family:inherit;font-size:12.5px;font-weight:600;color:#A8341A;cursor:pointer" style-hover="text-decoration:underline">ניקוי סינון</button>
+        <span style="margin-inline-start:auto;font-size:12.5px;color:#7C877E">{{ resultNote }}</span>
       </div>
       <sc-if value="{{ hasRequests }}" hint-placeholder-val="{{ true }}">
-        <div style="display:flex;flex-direction:column;gap:8px">
+        <div style="position:relative;z-index:1;display:flex;flex-direction:column;gap:8px">
           <sc-for list="{{ rows }}" as="r" hint-placeholder-count="3">
-            <div style="display:grid;grid-template-columns:auto 1fr auto auto auto;align-items:center;gap:16px;background:#FFFFFF;border:1.5px solid {{ r.cardBorder }};border-radius:8px;padding:14px 18px;transition:border-color .15s;opacity: {{ r.opacity }}" style-hover="border-color:#2A6B44">
-              <button onClick="{{ r.toggleDone }}" title="סימון כטופל" style="flex:none;width:22px;height:22px;border-radius:50%;border:1.5px solid {{ r.checkBorder }};background: {{ r.checkBg }};color:#F5F3EA;font-size:12px;line-height:1;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0">{{ r.checkMark }}</button>
+            <div style="display:grid;grid-template-columns: {{ r.cols }};align-items:center;gap:16px;background: {{ r.bg }};border:1.5px solid {{ r.cardBorder }};border-inline-start: {{ r.accentW }} solid {{ r.accent }};border-radius:8px;padding:14px 18px;transition:border-color .18s,border-inline-start-width .2s,box-shadow .18s,transform .18s,opacity .25s,background .5s ease;box-shadow:0 1px 0 rgba(23,35,26,.03);opacity: {{ r.opacity }};animation:rowIn .44s cubic-bezier(.22,.9,.28,1) both;animation-delay: {{ r.delay }}" style-hover="border-color:#2A6B44;box-shadow:0 6px 18px rgba(23,35,26,.09);transform:translateY(-2px)">
+              <button onClick="{{ r.toggleDone }}" title="{{ r.checkTitle }}" style="flex:none;width:24px;height:24px;border-radius:50%;border:2px solid {{ r.checkBorder }};background: {{ r.checkBg }};color:#F5F3EA;font-size:12px;font-weight:700;line-height:1;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;transition:background .22s,border-color .22s,transform .18s;animation: {{ r.dotAnim }}" style-hover="transform:scale(1.2)" style-active="transform:scale(.86)">{{ r.checkMark }}</button>
               <button onClick="{{ r.open }}" style="display:flex;flex-direction:column;gap:3px;min-width:0;text-align:right;background:none;border:none;padding:0;cursor:pointer;font-family:inherit">
                 <span style="font-size:15.5px;font-weight:700;color:#17231A;text-decoration: {{ r.strike }}">{{ r.name }}</span>
-                <span style="font-size:12.5px;color:#4E5B51">{{ r.meta }}</span>
+                <span style="display:flex;align-items:center;gap:7px;font-size:12.5px;color:#4E5B51"><span style="font-weight:700;color: {{ r.stColor }};animation: {{ r.labelAnim }}">{{ r.stLabel }}</span><span style="color:#B4BCB3">|</span>{{ r.meta }}</span>
               </button>
               <button onClick="{{ r.open }}" style="display:flex;flex-direction:column;align-items:flex-end;gap:3px;background:none;border:none;cursor:pointer;font-family:inherit;padding:0">
                 <span style="font-size:13px;font-weight:600;color:#2A6B44">{{ r.rec }}</span>
-                <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#7C877E">{{ r.pct }}% · {{ r.id }}</span>
+                <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#7C877E">{{ r.pct }}%</span>
               </button>
-              <span style="font-size:11.5px;font-weight:600;padding:5px 13px;border-radius:999px;background: {{ r.stBg }};color: {{ r.stColor }}">{{ r.stLabel }}</span>
-              <span style="display:flex;gap:4px">
-                <button onClick="{{ r.toggleArchive }}" title="ארכיון" style="width:30px;height:30px;border-radius:5px;border:1px solid rgba(23,35,26,.12);background:transparent;color:#7C877E;font-size:13px;cursor:pointer;font-family:inherit;padding:0" style-hover="border-color:#2A6B44;color:#2A6B44">{{ r.archIcon }}</button>
-                <button onClick="{{ r.remove }}" title="מחיקה" style="width:30px;height:30px;border-radius:5px;border:1px solid rgba(23,35,26,.12);background:transparent;color:#7C877E;font-size:14px;cursor:pointer;font-family:inherit;padding:0" style-hover="border-color:#A8341A;color:#A8341A">×</button>
-              </span>
+              <sc-if value="{{ r.hasAction }}" hint-placeholder-val="{{ false }}">
+                <button onClick="{{ r.action }}" title="{{ r.actionTitle }}" style="font-family:inherit;font-size:12.5px;font-weight:600;padding:8px 15px;border-radius:999px;cursor:pointer;background:transparent;color:#4E5B51;border:1.5px solid rgba(23,35,26,.18);white-space:nowrap;transition:border-color .18s,color .18s,background .18s" style-hover="border-color:#2A6B44;color:#1D4E31;background:#F0F6F1">{{ r.actionLabel }}</button>
+              </sc-if>
             </div>
           </sc-for>
         </div>
@@ -313,6 +347,18 @@ a{color:#2A6B44;text-decoration:none}a:hover{color:#1D4E31}
           <div style="font-size:13px;margin-top:6px">{{ emptyHint }}</div>
         </div>
       </sc-if>
+      <div style="margin-top:26px;padding-top:16px;border-top:1px solid rgba(23,35,26,.09);display:flex;flex-wrap:wrap;align-items:center;gap:14px">
+        <button onClick="{{ toggleTools }}" style="background:none;border:none;padding:0;font-family:inherit;font-size:12.5px;font-weight:600;color:#4E5B51;cursor:pointer" style-hover="color:#2A6B44">{{ toolsLabel }}</button>
+        <span style="font-size:12.5px;color: {{ dbNoteColor }}">{{ dbNote }}</span>
+      </div>
+      <sc-if value="{{ toolsOpen }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px">
+          <button onClick="{{ exportJson }}" style="font-family:inherit;font-size:12.5px;font-weight:600;padding:8px 14px;border-radius:5px;cursor:pointer;background:transparent;color:#263029;border:1.5px solid rgba(23,35,26,.15)" style-hover="border-color:#2A6B44;color:#2A6B44">ייצוא JSON</button>
+          <button onClick="{{ exportCsv }}" style="font-family:inherit;font-size:12.5px;font-weight:600;padding:8px 14px;border-radius:5px;cursor:pointer;background:transparent;color:#263029;border:1.5px solid rgba(23,35,26,.15)" style-hover="border-color:#2A6B44;color:#2A6B44">ייצוא CSV</button>
+          <label style="font-family:inherit;font-size:12.5px;font-weight:600;padding:8px 14px;border-radius:5px;cursor:pointer;background:transparent;color:#263029;border:1.5px solid rgba(23,35,26,.15);display:inline-flex;align-items:center" style-hover="border-color:#2A6B44;color:#2A6B44">ייבוא מקובץ<input type="file" accept="application/json,.json" onChange="{{ importFile }}" style="display:none"></label>
+          <button onClick="{{ seedDemo }}" style="font-family:inherit;font-size:12.5px;font-weight:600;padding:8px 14px;border-radius:5px;cursor:pointer;background:transparent;color:#263029;border:1.5px solid rgba(23,35,26,.15)" style-hover="border-color:#2A6B44;color:#2A6B44">איפוס וטעינת דמו</button>
+        </div>
+      </sc-if>
     </main>
   </div>
 </sc-if>
@@ -321,40 +367,33 @@ a{color:#2A6B44;text-decoration:none}a:hover{color:#1D4E31}
     <header style="background:#17231A;color:#F5F3EA;padding:20px 40px;display:flex;align-items:center;justify-content:space-between">
       <div style="display:flex;align-items:center;gap:14px">
         <button onClick="{{ backToList }}" style="background:none;border:none;color:#F2C744;font-family:inherit;font-size:13.5px;font-weight:600;cursor:pointer;padding:0">→ כל הבקשות</button>
-        <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:rgba(245,243,234,.55)">{{ dId }}</span>
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:rgba(245,243,234,.55)">{{ dId }} · {{ dDate }}</span>
       </div>
-      <span style="font-size:11.5px;font-weight:600;padding:5px 14px;border-radius:999px;background: {{ dStBg }};color: {{ dStColor }}">{{ dStLabel }}</span>
+      <span style="display:flex;align-items:center;gap:8px">
+        <span style="font-size:11.5px;font-weight:600;padding:5px 14px;border-radius:999px;background: {{ dStBg }};color: {{ dStColor }};transition:background .22s,color .22s">{{ dStLabel }}</span>
+        <button onClick="{{ dDownload }}" title="הורדת הבקשה כקובץ" style="width:30px;height:30px;border-radius:5px;border:1px solid rgba(245,243,234,.25);background:transparent;color:rgba(245,243,234,.7);font-size:14px;cursor:pointer;font-family:inherit;padding:0;transition:border-color .15s,color .15s,transform .15s" style-hover="border-color:#F2C744;color:#F2C744;transform:translateY(1px)">⬇</button>
+        <button onClick="{{ dToggleArchive }}" title="{{ dArchTitle }}" style="width:30px;height:30px;border-radius:5px;border:1px solid rgba(245,243,234,.25);background:transparent;color:rgba(245,243,234,.7);font-size:13px;cursor:pointer;font-family:inherit;padding:0;transition:border-color .15s,color .15s" style-hover="border-color:#F2C744;color:#F2C744">{{ dArchIcon }}</button>
+        <button onClick="{{ dRemove }}" title="מחיקת הבקשה" style="width:30px;height:30px;border-radius:5px;border:1px solid rgba(245,243,234,.25);background:transparent;color:rgba(245,243,234,.7);font-size:15px;cursor:pointer;font-family:inherit;padding:0" style-hover="border-color:#E2825F;color:#E2825F">×</button>
+      </span>
     </header>
-    <main style="max-width:900px;margin:0 auto;padding:28px 24px 90px;display:flex;flex-direction:column;gap:16px;animation:fadeUp .4s ease both">
-      <section style="background:#FFFFFF;border:1px solid rgba(23,35,26,.1);border-radius:10px;padding:22px 26px;display:flex;flex-wrap:wrap;gap:10px 36px;align-items:baseline">
-        <div><div style="font-size:11px;color:#7C877E;margin-bottom:2px">מבקש או מבקשת</div><div style="font-size:16px;font-weight:700">{{ dName }}</div></div>
-        <div><div style="font-size:11px;color:#7C877E;margin-bottom:2px">תפקיד</div><div style="font-size:14px;font-weight:500">{{ dRole }}</div></div>
-        <div><div style="font-size:11px;color:#7C877E;margin-bottom:2px">צוות או יחידה</div><div style="font-size:14px;font-weight:500">{{ dTeam }}</div></div>
-        <div><div style="font-size:11px;color:#7C877E;margin-bottom:2px">טלפון</div><div style="font-size:14px;font-weight:500;font-family:'IBM Plex Mono',monospace">{{ dPhone }}</div></div>
-        <div style="margin-inline-start:auto"><div style="font-size:11px;color:#7C877E;margin-bottom:2px">התקבלה</div><div style="font-size:14px;font-weight:500;font-family:'IBM Plex Mono',monospace">{{ dDate }}</div></div>
-      </section>
-      <section style="background:#17231A;color:#F5F3EA;border-radius:10px;padding:30px 30px;display:flex;flex-direction:column;gap:14px">
-        <div style="font-size:12.5px;font-weight:700;letter-spacing:.03em;color:#F2C744">המלצת המנוע · פנימי בלבד</div>
+    <main style="max-width:900px;margin:0 auto;padding:28px 24px 90px;display:flex;flex-direction:column;gap:16px;animation:fadeUp .3s ease both">
+      <section style="background:#17231A;color:#F5F3EA;border-radius:10px;padding:28px 30px;display:flex;flex-direction:column;gap:14px;animation:cardIn .46s cubic-bezier(.22,.9,.28,1) both">
+        <div style="font-size:12px;font-weight:700;letter-spacing:.03em;color:#F2C744">המלצת המנוע</div>
         <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap">
           <h3 style="margin:0;font-size:clamp(24px,3.6vw,34px);font-weight:700">{{ dRecName }}</h3>
-          <div style="display:flex;align-items:center;gap:12px">
-            <span style="font-family:'IBM Plex Mono',monospace;font-size:28px;font-weight:500;color:#F2C744">{{ dRecPct }}%</span>
-            <span style="font-size:12.5px;padding:6px 13px;border:1px solid rgba(242,199,68,.45);border-radius:999px;color:#F2C744">{{ dMatchLabel }}</span>
-          </div>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:28px;font-weight:500;color:#F2C744">{{ dRecPct }}%</span>
         </div>
-        <div style="height:5px;background:rgba(245,243,234,.14);border-radius:99px;overflow:hidden"><div style="height:100%;background:#F2C744;width: {{ dRecPctW }}"></div></div>
-        <p style="margin:0;font-size:15px;line-height:1.7;color:rgba(245,243,234,.82);max-width:62ch">{{ dRecExplain }}</p>
         <div style="display:flex;flex-direction:column;gap:7px;border-top:1px solid rgba(245,243,234,.12);padding-top:14px">
           <sc-for list="{{ dWhy }}" as="w" hint-placeholder-count="3">
             <div style="display:flex;gap:10px;align-items:baseline;font-size:14px;color:rgba(245,243,234,.85)"><span style="color:#F2C744;font-weight:700">✓</span>{{ w }}</div>
           </sc-for>
         </div>
       </section>
-      <section>
+      <section style="animation:cardIn .46s cubic-bezier(.22,.9,.28,1) .08s both">
         <h4 style="margin:4px 0 12px;font-size:16px;font-weight:700">חלופות מובילות</h4>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px">
           <sc-for list="{{ dAlts }}" as="alt" hint-placeholder-count="3">
-            <div style="background:#FFFFFF;border:1.5px solid {{ alt.border }};border-radius:10px;padding:20px;display:flex;flex-direction:column;gap:8px">
+            <div style="background:#FFFFFF;border:1.5px solid {{ alt.border }};border-radius:10px;padding:20px;display:flex;flex-direction:column;gap:8px;transition:transform .18s,box-shadow .18s" style-hover="transform:translateY(-3px);box-shadow:0 8px 20px rgba(23,35,26,.08)">
               <div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#7C877E">{{ alt.rank }}</span><span style="font-family:'IBM Plex Mono',monospace;font-size:16px;font-weight:500;color:#2A6B44">{{ alt.pct }}%</span></div>
               <div style="font-size:16px;font-weight:700">{{ alt.name }}</div>
               <div style="font-size:13px;line-height:1.55;color:#4E5B51">{{ alt.desc }}</div>
@@ -362,56 +401,65 @@ a{color:#2A6B44;text-decoration:none}a:hover{color:#1D4E31}
           </sc-for>
         </div>
       </section>
-      <section style="background:#FFFFFF;border:1px solid rgba(23,35,26,.1);border-radius:10px;padding:26px 28px">
-        <h4 style="margin:0;font-size:20px;font-weight:700">{{ dProdTitle }}</h4>
-        <p style="margin:8px 0 16px;font-size:14.5px;line-height:1.65;color:#263029">{{ dProdDesc }}</p>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:8px">
-          <sc-for list="{{ dProdFeatures }}" as="f" hint-placeholder-count="4">
-            <div style="display:flex;gap:9px;align-items:baseline;font-size:13.5px;color:#263029"><span style="width:6px;height:6px;background:#2A6B44;transform:rotate(45deg);flex:none;position:relative;top:-1px"></span>{{ f }}</div>
-          </sc-for>
-        </div>
-        <div style="margin-top:16px;background:#F0F6F1;border:1px solid rgba(42,107,68,.25);border-radius:6px;padding:13px 15px;font-size:13.5px;line-height:1.6"><b style="color:#1D4E31">MVP מוצע:</b> {{ dProdMvp }}</div>
-      </section>
-      <section style="background:#FFFFFF;border:1px solid rgba(23,35,26,.1);border-radius:10px;padding:26px 28px">
-        <h4 style="margin:0 0 14px;font-size:16px;font-weight:700">אפיון ראשוני</h4>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:0 34px">
-          <sc-for list="{{ dBrief }}" as="b" hint-placeholder-count="6">
-            <div style="padding:12px 0;border-top:1px solid rgba(23,35,26,.08)"><div style="font-size:12px;font-weight:700;color:#2A6B44;margin-bottom:3px">{{ b.k }}</div><div style="font-size:13.5px;line-height:1.6;color:#263029">{{ b.v }}</div></div>
-          </sc-for>
-        </div>
-      </section>
-      <section style="background:#FFFFFF;border:1px solid rgba(23,35,26,.1);border-radius:10px;padding:26px 28px">
-        <h4 style="margin:0 0 14px;font-size:16px;font-weight:700">תשובות המבקש או מבקשת</h4>
+      <section style="background:#FFFFFF;border:1px solid rgba(23,35,26,.1);border-radius:10px;padding:26px 28px;animation:cardIn .46s cubic-bezier(.22,.9,.28,1) .16s both">
+        <h4 style="margin:0 0 14px;font-size:16px;font-weight:700">מה הם סיפרו לנו</h4>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:0 34px">
           <sc-for list="{{ dAnswers }}" as="a" hint-placeholder-count="6">
             <div style="padding:11px 0;border-top:1px solid rgba(23,35,26,.08)"><div style="font-size:12px;color:#7C877E;margin-bottom:3px">{{ a.q }}</div><div style="font-size:14px;font-weight:600;color:#17231A">{{ a.a }}</div></div>
           </sc-for>
         </div>
       </section>
-      <section style="background:#FFFFFF;border:1.5px solid rgba(42,107,68,.35);border-radius:10px;padding:26px 28px">
+      <section style="background:#FFFFFF;border:1.5px solid rgba(42,107,68,.35);border-radius:10px;padding:26px 28px;animation:cardIn .46s cubic-bezier(.22,.9,.28,1) .24s both">
         <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:14px">
-          <h4 style="margin:0;font-size:16px;font-weight:700">מענה ליחידה המבקשת</h4>
+          <h4 style="margin:0;font-size:16px;font-weight:700">ליצירת קשר</h4>
           <div style="display:flex;gap:8px">
             <sc-for list="{{ dStatusBtns }}" as="sb" hint-placeholder-count="3">
-              <button onClick="{{ sb.set }}" style="font-family:inherit;font-size:12px;font-weight:600;padding:7px 15px;border-radius:999px;cursor:pointer;background: {{ sb.bg }};color: {{ sb.color }};border:1.5px solid {{ sb.border }}">{{ sb.label }}</button>
+              <button onClick="{{ sb.set }}" style="font-family:inherit;font-size:12px;font-weight:600;padding:7px 15px;border-radius:999px;cursor:pointer;background: {{ sb.bg }};color: {{ sb.color }};border:1.5px solid {{ sb.border }};transition:background .22s,color .22s,border-color .22s" style-hover="border-color:#2A6B44">{{ sb.label }}</button>
             </sc-for>
           </div>
         </div>
-        <textarea value="{{ dReply }}" onChange="{{ setReply }}" placeholder="כתבו כאן את המענה: הפתרון המוצע, לוח זמנים, שאלות המשך..." style="width:100%;min-height:120px;padding:14px 16px;font-family:inherit;font-size:14px;line-height:1.6;border:1.5px solid rgba(23,35,26,.15);border-radius:6px;background:#FBFCFA;outline:none;box-sizing:border-box;resize:vertical"></textarea>
-        <sc-if value="{{ dReplySaved }}" hint-placeholder-val="{{ false }}"><div style="margin-top:10px;font-size:13px;color:#2A6B44;font-weight:600">✓ המענה נשמר ונשלח ({{ dRepliedAt }})</div></sc-if>
-        <button onClick="{{ sendReply }}" style="margin-top:14px;padding:14px 40px;font-size:14.5px;font-weight:600;font-family:inherit;background:#17231A;color:#F5F3EA;border:none;border-radius:5px;cursor:pointer;transition:background .15s" style-hover="background:#2A6B44">שליחת מענה</button>
+        <div style="display:flex;flex-wrap:wrap;align-items:flex-end;gap:14px 40px">
+          <div>
+            <div style="font-size:12px;color:#7C877E;margin-bottom:4px">איש קשר</div>
+            <div style="font-size:19px;font-weight:700">{{ dName }}</div>
+            <div style="font-size:13.5px;color:#4E5B51;margin-top:2px">{{ dContactMeta }}</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:4px">
+            <div style="font-size:12px;color:#7C877E">טלפון</div>
+            <a href="{{ dTelHref }}" style="font-family:'IBM Plex Mono',monospace;font-size:22px;font-weight:500;color:#1D4E31;text-decoration:none;letter-spacing:.02em" style-hover="color:#2A6B44;text-decoration:underline">{{ dPhone }}</a>
+          </div>
+          <sc-if value="{{ dHasAvnet }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;flex-direction:column;gap:4px">
+              <div style="font-size:12px;color:#7C877E">אבנט</div>
+              <a href="{{ dAvnetHref }}" style="font-family:'IBM Plex Mono',monospace;font-size:22px;font-weight:500;color:#1D4E31;text-decoration:none;letter-spacing:.02em" style-hover="color:#2A6B44;text-decoration:underline">{{ dAvnet }}</a>
+            </div>
+          </sc-if>
+        </div>
       </section>
     </main>
   </div>
 </sc-if>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;earlyStop&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;מנוע ההחלטה&quot;},&quot;startScreen&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;landing&quot;,&quot;admin&quot;],&quot;default&quot;:&quot;landing&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;תצוגה&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;earlyStop&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;מנוע ההחלטה&quot;}}">
 class Component extends DCLogic {
-  state = { screen: "landing", cfg: null, answers: {}, idx: 0, sel: null, form: { name: "", role: "", team: "", phone: "" }, reqId: null, formErr: false, requests: [], adminSel: null, replyDraft: "", replyJustSaved: false, search: "", filter: "open", dbNote: "", dueDate: "", launching: false, qPhase: "in" };
+  state = { screen: "landing", cfg: null, answers: {}, idx: 0, sel: null, form: { name: "", role: "", team: "", phone: "", avnet: "" }, reqId: null, formErr: false, requests: [], adminSel: null, replyDraft: "", replyJustSaved: false, search: "", filter: "open", dbNote: "", dueDate: "", launching: false, qPhase: "in" };
   componentDidMount() {
-    import("./matzpen-config.js").then(m => this.setState({ cfg: m }));
+    import("./matzpen-config.js").then(m => {
+      this.setState({ cfg: m });
+      const stored = this.loadReqs();
+      const live = stored.filter(r => r && r.recommendation && m.SOLUTIONS[r.recommendation.key]);
+      if (live.length !== stored.length) {
+        this.saveReqs(live);
+        this.setState({ requests: live, dbNote: "הוסרו " + (stored.length - live.length) + " בקשות עם פתרונות שאינם בקטלוג" });
+      }
+    });
     if ((this.props.startScreen ?? "landing") === "admin") this.setState({ screen: "admin", requests: this.loadReqs() });
+  }
+  componentDidUpdate() {
+    if (this.state.listReady === false && !this._listRaf) {
+      this._listRaf = requestAnimationFrame(() => { this._listRaf = null; this.setState({ listReady: true }); });
+    }
   }
   loadReqs() { try { return JSON.parse(localStorage.getItem("matzpen_requests") || "[]"); } catch (e) { return []; } }
   saveReqs(list) { try { localStorage.setItem("matzpen_requests", JSON.stringify(list)); } catch (e) {} }
@@ -454,12 +502,16 @@ class Component extends DCLogic {
     keys.forEach(k => { score[k] *= (bias[k] == null ? 1 : bias[k]); });
     const ranked = keys.map(k => ({ key: k, ...c.SOLUTIONS[k], pct: max[k] ? Math.round(100 * score[k] / max[k]) : 0, raw: score[k] })).sort((a, b) => b.raw - a.raw);
     const top = ranked[0];
-    const why = [...new Set(reasons.filter(r => (r.opt.s[top.key] || 0) >= 4 && r.opt.r).map(r => r.opt.r))];
+    const drivers = reasons
+      .filter(r => (r.opt.s[top.key] || 0) >= 4 && r.opt.r)
+      .map(r => ({ r: r.opt.r, w: (c.WEIGHTS[r.q.cat] || 1) * (r.opt.s[top.key] || 0) }))
+      .sort((a, b) => b.w - a.w);
+    const why = [...new Set(drivers.map(d => d.r))].slice(0, 4);
     return { ranked, top, why };
   }
   finishOrNext(answers, idx) {
     const q = this.queue(answers), c = this.state.cfg;
-    const earlyStop = this.props.earlyStop ?? true;
+    const earlyStop = this.props.earlyStop ?? false;
     const answered = q.filter(x => answers[x.id]).length;
     if (earlyStop && answered >= c.ENGINE.minQuestions && idx < q.length) {
       const r = this.compute(answers).ranked;
@@ -467,6 +519,62 @@ class Component extends DCLogic {
     }
     if (idx >= q.length) return this.setState({ screen: "details" });
     this.stepTo(idx, answers[q[idx].id] || (q[idx].kind === "rank" || q[idx].kind === "multi" ? [] : null));
+  }
+  calVals(dueDate, dateIds) {
+    const s = this.state;
+    const pad = n => String(n).padStart(2, "0");
+    const iso = d => d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate());
+    const today = new Date(); today.setHours(0, 0, 0, 0);
+    const base = s.calMonth ? new Date(s.calMonth + "-01T00:00") : (dueDate ? new Date(dueDate + "T00:00") : new Date(today));
+    const y = base.getFullYear(), m = base.getMonth();
+    const first = new Date(y, m, 1), days = new Date(y, m + 1, 0).getDate();
+    const atFirstMonth = y === today.getFullYear() && m === today.getMonth();
+    const shift = n => {
+      const d = new Date(y, m + n, 1);
+      if (n < 0 && atFirstMonth) return;
+      this.setState({ calMonth: d.getFullYear() + "-" + pad(d.getMonth() + 1) });
+    };
+    const cells = [];
+    for (let i = 0; i < first.getDay(); i++) cells.push({ label: "", bg: "transparent", border: "transparent", color: "transparent", weight: "400", cursor: "default", hover: "", pick: () => {} });
+    for (let d = 1; d <= days; d++) {
+      const date = new Date(y, m, d), key = iso(date);
+      const past = date < today, on = key === dueDate, isToday = key === iso(today);
+      cells.push({
+        label: String(d),
+        bg: on ? "#1D4E31" : "transparent",
+        border: on ? "#1D4E31" : isToday ? "#F2C744" : "transparent",
+        color: on ? "#F5F3EA" : past ? "#C6CDC6" : "#17231A",
+        weight: on || isToday ? "700" : "500",
+        cursor: past ? "default" : "pointer",
+        hover: past || on ? "" : "background:#F0F6F1;border-color:#2A6B44",
+        pick: past ? () => {} : () => this.setState({ dueDate: key, sel: dateIds[0] || s.sel, calOpen: false })
+      });
+    }
+    const narrow = (s.vw || (typeof window !== "undefined" ? window.innerWidth : 1024)) < 640;
+    return {
+      calOpen: !!s.calOpen,
+      calWrapPos: narrow ? "fixed" : "absolute",
+      calWrapInset: narrow ? "0" : "auto 0 auto auto",
+      calWrapAlign: narrow ? "flex-end" : "flex-start",
+      calBackdrop: narrow ? "rgba(23,35,26,.45)" : "transparent",
+      calWrapPad: narrow ? "0 12px 12px" : "0",
+      calW: narrow ? "100%" : "304px",
+      calPad: narrow ? "18px" : "16px",
+      calAnim: narrow ? "sheetIn .26s cubic-bezier(.22,.9,.28,1) both" : "menuIn .18s cubic-bezier(.22,.9,.28,1) both",
+      cellH: narrow ? "46px" : "36px",
+      cellFs: narrow ? "15px" : "13.5px",
+      stopProp: e => e.stopPropagation(),
+      calBackdropClick: () => this.setState({ calOpen: false }),
+      toggleCal: () => this.setState({ calOpen: !s.calOpen, sel: dateIds[0] || s.sel, calMonth: s.calMonth || (dueDate ? dueDate.slice(0, 7) : iso(today).slice(0, 7)) }),
+      calTitle: first.toLocaleDateString("he-IL", { month: "long", year: "numeric" }),
+      calDows: ["א", "ב", "ג", "ד", "ה", "ו", "ש"],
+      calCells: cells,
+      calPrev: () => shift(-1), calNext: () => shift(1),
+      calPrevColor: atFirstMonth ? "#C6CDC6" : "#263029",
+      calPrevCursor: atFirstMonth ? "default" : "pointer",
+      calHasPick: !!dueDate,
+      calClear: () => this.setState({ dueDate: "", calOpen: false })
+    };
   }
   planeXFor(idx) {
     const c = this.state.cfg; if (!c) return 0;
@@ -477,8 +585,8 @@ class Component extends DCLogic {
   stepTo(idx, sel) {
     const from = this.planeXFor(this.state.idx);
     this.setState({ qPhase: "out", flightFrom: from });
-    setTimeout(() => this.setState({ idx, sel, qPhase: "in" }, () => {
-      requestAnimationFrame(() => { try { this._flight && this._flight.beginElement(); } catch (e) {} });
+    setTimeout(() => this.setState({ idx, sel, qPhase: "in", calOpen: false, calMonth: null }, () => {
+      try { this._flight && this._flight.beginElement(); } catch (e) {}
     }), 200);
   }
   componentWillUnmount() { if (this._onResize) window.removeEventListener("resize", this._onResize); }
@@ -506,25 +614,56 @@ class Component extends DCLogic {
       why: result.why,
       alternatives: result.ranked.slice(0, 3).map((r, i) => ({ name: r.name, pct: r.pct, desc: i === 0 ? "ההתאמה הכוללת הטובה ביותר." : r.desc })),
       product: p,
+      classification: this.ansLabel("classification") || "לא צוין",
       brief: [
-        { k: "הרקע לפנייה", v: this.ansLabel("trigger") || "לא צוין" },
-        { k: "איך הגיעו אלינו", v: this.ansLabel("source") || "לא צוין" },
-        { k: "הבעיה", v: goal + (fu ? ", בדגש על: " + fu : "") },
-        { k: "קהל היעד", v: audience },
         { k: "הפתרון המומלץ", v: top.name + " (" + top.pct + "% התאמה)" },
         { k: "קונספט המוצר", v: p.title },
         { k: "יכולות ליבה", v: p.features.join(" · ") },
-        { k: "פלטפורמה", v: platform },
-        { k: "מורכבות", v: complexity },
         { k: "MVP", v: p.mvp },
-        { k: "הרחבות עתידיות", v: p.future },
-        { k: "סיווג", v: this.ansLabel("classification") || "לא צוין" },
-        { k: "העדפת המבקש או מבקשת", v: this.ansLabel("preference") || "לא צוינה" },
-        { k: "תאריך יעד", v: s.dueDate ? new Date(s.dueDate + "T00:00").toLocaleDateString("he-IL", { day: "numeric", month: "long", year: "numeric" }) : (this.ansLabel("urgency") || "לא נקבע") }
+        { k: "הרחבות עתידיות", v: p.future }
       ] };
   }
   statusMeta(st) {
-    return { new: { label: "חדשה", bg: "#F0F6F1", color: "#2A6B44" }, inprogress: { label: "בטיפול", bg: "#E9F2EA", color: "#2A6B44" }, answered: { label: "נענתה", bg: "#E6E9E4", color: "#4E5B51" } }[st] || { label: st, bg: "#E6E9E4", color: "#4E5B51" };
+    return {
+      new: { label: "חדשה", bg: "#FDF6DF", color: "#8A6B12", accent: "#F2C744", rowBg: "#FEFAEC", flashBg: "#FBF0CE",
+        dotBorder: "#D9A93A", dotBg: "transparent", dotMark: "",
+        next: { to: "inprogress", title: "חדשה · לחיצה מעבירה לעבודה" } },
+      inprogress: { label: "בעבודה", bg: "#E9F2EA", color: "#1D4E31", accent: "#2A6B44", rowBg: "#FFFFFF", flashBg: "#E3F0E6",
+        dotBorder: "#2A6B44", dotBg: "transparent", dotMark: "•",
+        next: { to: "answered", title: "בעבודה · לחיצה מסמנת כהושלמה" } },
+      answered: { label: "הושלמה", bg: "#E6E9E4", color: "#4E5B51", accent: "rgba(23,35,26,.3)", rowBg: "#FBFBF9", flashBg: "#E8EBE6",
+        dotBorder: "#2A6B44", dotBg: "#2A6B44", dotMark: "✓",
+        next: { to: "new", title: "הושלמה · לחיצה מחזירה לחדשה" } }
+    }[st] || { label: st, bg: "#E6E9E4", color: "#4E5B51", accent: "rgba(23,35,26,.14)", rowBg: "#FFFFFF", flashBg: "#E8EBE6", dotBorder: "rgba(23,35,26,.28)", dotBg: "transparent", dotMark: "", next: { to: "new", title: "" } };
+  }
+  requestText(r) {
+    const L = [];
+    const date = new Date(r.timestamp);
+    L.push("בקשה " + r.id);
+    L.push("התקבלה: " + date.toLocaleDateString("he-IL") + " " + date.toLocaleTimeString("he-IL", { hour: "2-digit", minute: "2-digit" }));
+    L.push("מצב: " + this.statusMeta(r.status).label);
+    L.push("");
+    L.push("איש קשר");
+    L.push("  שם: " + (r.user.name || "לא צוין"));
+    L.push("  תפקיד: " + (r.user.role || "לא צוין"));
+    L.push("  צוות או יחידה: " + (r.user.team || "לא צוין"));
+    L.push("  טלפון: " + (r.user.phone || "לא צוין"));
+    L.push("  אבנט: " + (r.user.avnet || "לא צוין"));
+    L.push("");
+    L.push("המלצת המנוע");
+    L.push("  " + r.recommendation.name + " (" + r.recommendation.pct + "% התאמה)");
+    (r.why || []).forEach(w => L.push("  · " + w));
+    L.push("");
+    L.push("חלופות");
+    (r.alternatives || []).forEach((a, i) => L.push("  " + (i + 1) + ". " + a.name + " (" + a.pct + "%)"));
+    L.push("");
+    L.push("מה הם סיפרו לנו");
+    (r.answersLabeled || []).forEach(a => { L.push("  " + a.q); L.push("    " + a.a); });
+    if (r.dueDate) { L.push(""); L.push("תאריך יעד: " + new Date(r.dueDate + "T00:00").toLocaleDateString("he-IL")); }
+    L.push("");
+    L.push("אפיון מוצע");
+    (r.brief || []).forEach(b => L.push("  " + b.k + ": " + b.v));
+    return L.join("\n");
   }
   download(name, text, mime) {
     const url = URL.createObjectURL(new Blob(["\ufeff" + text], { type: mime }));
@@ -533,59 +672,139 @@ class Component extends DCLogic {
   }
   seed() {
     const c = this.state.cfg; if (!c) return;
+    const D = (n) => new Date(Date.now() + n * 864e5).toISOString().slice(0, 10);
     const demo = [
-      { name: "רס\"ן נועה ברק", role: "קצינת הדרכה", team: "מדור הכשרות", phone: "052-4410981", answers: { goal: "practice", fu_practice: "decisions", behavior: "decide", interactivity: "full", frequency: "regular", urgency: "months", audience: "unit", complexity: "complex", platform: "internal" }, status: "new", days: 0 },
-      { name: "סרן יואב אלמוג", role: "ראש צוות תפעול", team: "אגף מבצעים", phone: "054-8823017", answers: { goal: "workflow", fu_workflow: "manual", behavior: "repeat", interactivity: "medium", frequency: "daily", urgency: "weeks", audience: "team", complexity: "moderate", platform: "internal" }, status: "inprogress", days: 2 },
-      { name: "רס\"ל מאיה כהן", role: "רכזת תוכן", team: "דוברות", phone: "050-7712340", answers: { goal: "explain", fu_explain: "watch", behavior: "watch", interactivity: "passive", frequency: "once", urgency: "asap", audience: "public", complexity: "simple", platform: "multi" }, status: "answered", days: 6, reply: "הפקנו סרטון הסברה בן 75 שניות. טיוטה ראשונה תישלח ביום ראשון." },
-      { name: "סא\"ל דנה שביט", role: "ראש מדור נתונים", team: "מטה טכנולוגי", phone: "053-9014477", answers: { goal: "collect", fu_workflow: "visibility", behavior: "monitor", interactivity: "light", frequency: "daily", urgency: "months", audience: "org", complexity: "complex", platform: "internal" }, status: "new", days: 1 }
+      { name: "רס\"ן נועה ברק", role: "קצינת הדרכה", team: "מדור הכשרות", phone: "052-4410981", avnet: "482-7714", hours: 3,
+        a: { goal: ["teach"], trigger: "new", source: "commander", frequency: "regular", audience: "unit", population: ["regulars","officers_nco"], urgency: "months", classification: "restricted", platform: ["shvil","internal"], preference: ["inter","video"] } },
+      { name: "סרן יואב אלמוג", role: "ראש צוות תפעול", team: "אגף מבצעים", phone: "054-8823017", avnet: "331-2098", hours: 9,
+        a: { goal: ["workflow"], trigger: "recurring", source: "returning", frequency: "daily", audience: "team", population: ["officers_nco"], urgency: "weeks", classification: "confidential", platform: ["galaxy","internal"], preference: ["inter"] } },
+      { name: "רס\"ל מאיה כהן", role: "רכזת תוכן", team: "דוברות", phone: "050-7712340", avnet: "770-1145", hours: 20,
+        a: { goal: ["explain","awareness"], trigger: "present", source: "saw", frequency: "once", audience: "wide", population: ["regulars"], urgency: "asap", classification: "unclassified", platform: ["civil","shvil"], preference: ["video","poster"] } },
+      { name: "סא\"ל דנה שביט", role: "ראש מדור נתונים", team: "מטה טכנולוגי", phone: "053-9014477", avnet: "215-8830", hours: 26,
+        a: { goal: ["workflow"], trigger: "recurring", source: "colleague", frequency: "daily", audience: "unit", population: ["commanders","officers_nco"], urgency: "months", classification: "secret", platform: ["internal"], preference: ["deck","inter"] } },
+      { name: "רס\"ן איתי פרץ", role: "קצין בטיחות", team: "מדור בטיחות", phone: "052-3390126", avnet: "604-3312", hours: 33,
+        a: { goal: ["teach","awareness"], trigger: "recurring", source: "commander", frequency: "regular", audience: "wide", population: ["regulars","officers_nco"], urgency: "weeks", classification: "unclassified", platform: ["shvil","civil"], preference: ["poster","anim"] } },
+      { name: "סרן שיר אדרי", role: "קצינת תורה", team: "מרכז הדרכה", phone: "058-4471209", avnet: "129-5540", hours: 41,
+        a: { goal: ["demo","explain"], trigger: "new", source: "search", frequency: "once", audience: "wide", population: ["officers_nco"], urgency: "months", classification: "restricted", platform: ["internal"], preference: ["anim","inter"] } },
+      { name: "רס\"ם אבי מזרחי", role: "רמ\"ד תחזוקה", team: "אגף לוגיסטיקה", phone: "050-8812477", avnet: "917-2264", hours: 50,
+        a: { goal: ["teach"], trigger: "knowledge", source: "returning", frequency: "few", audience: "team", population: ["officers_nco"], urgency: "none", classification: "restricted", platform: ["galaxy"], preference: ["inter","deck"] } },
+      { name: "סא\"ל רותם לוי", role: "ראש חטיבת תכנון", team: "מטה כללי", phone: "054-2201938", avnet: "058-4417", hours: 58,
+        a: { goal: ["explain"], trigger: "present", source: "commander", frequency: "once", audience: "team", population: ["commanders"], urgency: "exact", classification: "confidential", platform: ["galaxy"], preference: ["deck"] }, due: D(11) },
+      { name: "רס\"ן טל בן חיים", role: "קצינת מיתוג", team: "לשכת המפקד", phone: "052-9983041", avnet: "443-1176", hours: 66,
+        a: { goal: ["morale"], trigger: "present", source: "saw", frequency: "once", audience: "wide", population: ["regulars","officers_nco"], urgency: "weeks", classification: "unclassified", platform: ["civil","shvil"], preference: ["poster","video"] } },
+      { name: "סרן עומר דגן", role: "קצין קליטה", team: "מדור כוח אדם", phone: "053-7714520", avnet: "662-9903", hours: 74,
+        a: { goal: ["teach","explain"], trigger: "new", source: "colleague", frequency: "regular", audience: "wide", population: ["regulars"], urgency: "months", classification: "restricted", platform: ["shvil","civil"], preference: ["inter","video"] } },
+      { name: "רס\"ל יעל אשכנזי", role: "רכזת ידע", team: "מדור תורה", phone: "050-3327814", avnet: "284-6650", hours: 83,
+        a: { goal: ["explain"], trigger: "knowledge", source: "search", frequency: "few", audience: "unit", population: ["officers_nco"], urgency: "none", classification: "confidential", platform: ["galaxy","internal"], preference: ["inter","anim"] } },
+      { name: "סא\"ל גיל אוחיון", role: "ראש מערך אימונים", team: "פיקוד הדרכה", phone: "058-9930277", avnet: "731-4408", hours: 91,
+        a: { goal: ["demo"], trigger: "new", source: "returning", frequency: "regular", audience: "wide", population: ["regulars","officers_nco","commanders"], urgency: "months", classification: "secret", platform: ["internal"], preference: ["anim","inter"] } },
+      { name: "רס\"ן שירן כרמי", role: "קצינת תקשוב", team: "מדור תקשוב", phone: "052-6604419", avnet: "396-2287", hours: 99,
+        a: { goal: ["workflow"], trigger: "recurring", source: "commander", frequency: "daily", audience: "unit", population: ["officers_nco"], urgency: "asap", classification: "confidential", platform: ["galaxy","internal"], preference: ["inter"] } },
+      { name: "סרן ניר שגב", role: "קצין תרגילים", team: "אגף מבצעים", phone: "054-8871203", avnet: "550-7719", hours: 108,
+        a: { goal: ["demo","teach"], trigger: "new", source: "colleague", frequency: "few", audience: "team", population: ["officers_nco","commanders"], urgency: "weeks", classification: "topsecret", platform: ["internal"], preference: ["deck","inter"] } },
+      { name: "רס\"ם חן ביטון", role: "רמ\"ד הסברה", team: "דוברות", phone: "050-4419826", avnet: "877-3345", hours: 116,
+        a: { goal: ["awareness"], trigger: "present", source: "saw", frequency: "once", audience: "external", population: ["external","officers_nco"], urgency: "exact", classification: "unclassified", platform: ["civil"], preference: ["video","poster"] }, due: D(24) },
+      { name: "רס\"ן ליאור נחום", role: "קצינת רפואה", team: "מרפאה חטיבתית", phone: "053-2286704", avnet: "142-9958", hours: 125,
+        a: { goal: ["teach"], trigger: "recurring", source: "search", frequency: "regular", audience: "unit", population: ["regulars"], urgency: "weeks", classification: "restricted", platform: ["shvil","civil"], preference: ["poster","inter"] } },
+      { name: "סרן מור אביטן", role: "קצין תכנון תקציב", team: "אגף תקציבים", phone: "058-3340192", avnet: "409-1163", hours: 134,
+        a: { goal: ["explain"], trigger: "present", source: "commander", frequency: "few", audience: "team", population: ["commanders"], urgency: "asap", classification: "confidential", platform: ["galaxy"], preference: ["deck"] } },
+      { name: "רס\"ל אורי שמש", role: "רכז סייבר", team: "מערך הגנה", phone: "052-7702348", avnet: "938-5521", hours: 142,
+        a: { goal: ["teach","awareness"], trigger: "new", source: "returning", frequency: "regular", audience: "wide", population: ["regulars","officers_nco"], urgency: "months", classification: "secret", platform: ["internal","galaxy"], preference: ["inter","anim"] } },
+      { name: "סא\"ל מיכל ברוך", role: "ראש מדור פרט", team: "אגף כוח אדם", phone: "054-1129847", avnet: "623-8874", hours: 151,
+        a: { goal: ["morale","awareness"], trigger: "recurring", source: "colleague", frequency: "regular", audience: "wide", population: ["regulars"], urgency: "none", classification: "unclassified", platform: ["civil","shvil"], preference: ["poster","video"] } },
+      { name: "רס\"ן עדי גולן", role: "קצינת ארכיון", team: "מדור תורה", phone: "050-9948213", avnet: "317-4492", hours: 160,
+        a: { goal: ["explain"], trigger: "knowledge", source: "other", frequency: "few", audience: "unit", population: ["officers_nco","commanders"], urgency: "months", classification: "restricted", platform: ["galaxy","internal"], preference: ["inter","deck"] } }
     ];
     const built = demo.map((d, i) => {
-      const prev = { answers: this.state.answers, form: this.state.form };
-      this.state.answers = d.answers; this.state.form = { name: d.name, role: d.role, team: d.team, phone: d.phone };
-      const req = this.buildRequest("MTZ-DEMO" + (i + 1));
-      this.state.answers = prev.answers; this.state.form = prev.form;
-      req.timestamp = new Date(Date.now() - d.days * 864e5).toISOString();
-      req.status = d.status; req.archived = false;
-      if (d.reply) { req.reply = d.reply; req.repliedAt = req.timestamp; }
+      const prev = { answers: this.state.answers, form: this.state.form, dueDate: this.state.dueDate };
+      this.state.answers = d.a;
+      this.state.form = { name: d.name, role: d.role, team: d.team, phone: d.phone, avnet: d.avnet };
+      this.state.dueDate = d.due || "";
+      const req = this.buildRequest("MTZ-" + String(1041 + i));
+      this.state.answers = prev.answers; this.state.form = prev.form; this.state.dueDate = prev.dueDate;
+      req.timestamp = new Date(Date.now() - d.hours * 36e5).toISOString();
+      req.status = "new"; req.archived = false;
       return req;
     });
-    const existing = this.loadReqs().filter(r => !/^MTZ-DEMO/.test(r.id));
-    const list = [...existing, ...built];
-    this.saveReqs(list); this.setState({ requests: list, dbNote: "נוספו " + built.length + " בקשות דמו" });
+    this.saveReqs(built);
+    this.setState({ requests: built, filter: "open", search: "", solFilter: "all", clsFilter: "all", listReady: false, dbNote: "הנתונים אופסו · נטענו " + built.length + " בקשות חדשות" });
   }
   adminVals() {
     const s = this.state;
     const q = (s.search || "").trim().toLowerCase();
     const filter = s.filter || "open";
     const all = [...s.requests].sort((a, b) => b.timestamp.localeCompare(a.timestamp));
-    const matches = x => !q || [x.id, x.user.name, x.user.team, x.user.role, x.recommendation.name].filter(Boolean).join(" ").toLowerCase().includes(q);
-    const reqs = all.filter(x => {
-      if (!matches(x)) return false;
+    const briefVal = (x, key) => { const e = (x.brief || []).find(b => b.k === key); return e ? e.v : ""; };
+    const matches = x => !q || [x.id, x.user.name, x.user.team, x.user.role, x.recommendation.name,
+      ...(x.answersLabeled || []).flatMap(a => [a.q, a.a])]
+      .filter(Boolean).join(" ").toLowerCase().includes(q);
+    const solFilter = s.solFilter || "all";
+    const clsFilter = s.clsFilter || "all";
+    const byStatus = x => {
       if (filter === "archive") return !!x.archived;
       if (x.archived) return false;
       if (filter === "open") return x.status !== "answered";
       if (filter === "all") return true;
       return x.status === filter;
-    });
+    };
+    const clsOf = x => x.classification || briefVal(x, "סיווג") || "לא צוין";
+    const facets = x => (solFilter === "all" || x.recommendation.key === solFilter) && (clsFilter === "all" || clsOf(x) === clsFilter);
+    const reqs = all.filter(x => matches(x) && byStatus(x) && facets(x));
+    const statusPool = all.filter(byStatus);
+    const solOpts = [...new Set(statusPool.map(x => x.recommendation.key))]
+      .map(k => ({ id: k, label: (statusPool.find(x => x.recommendation.key === k) || {}).recommendation.name, n: statusPool.filter(x => x.recommendation.key === k && (clsFilter === "all" || clsOf(x) === clsFilter)).length }))
+      .sort((a, b) => b.n - a.n);
+    const clsOpts = [...new Set(statusPool.map(clsOf))]
+      .map(l => ({ id: l, label: l, n: statusPool.filter(x => clsOf(x) === l && (solFilter === "all" || x.recommendation.key === solFilter)).length }))
+      .sort((a, b) => b.n - a.n);
     const r = s.requests.find(x => x.id === s.adminSel);
-    const filterDefs = [["open", "פתוחות"], ["new", "חדשות"], ["inprogress", "בטיפול"], ["answered", "נענו"], ["all", "הכול"], ["archive", "ארכיון"]];
+    const counts = {
+      open: all.filter(x => !x.archived && x.status !== "answered").length,
+      new: all.filter(x => !x.archived && x.status === "new").length,
+      inprogress: all.filter(x => !x.archived && x.status === "inprogress").length,
+      answered: all.filter(x => !x.archived && x.status === "answered").length,
+      all: all.filter(x => !x.archived).length,
+      archive: all.filter(x => x.archived).length
+    };
+    const filterDefs = [["open", "פתוחות"], ["new", "חדשות"], ["inprogress", "בעבודה"], ["answered", "הושלמו"], ["all", "הכול"], ["archive", "ארכיון"]];
     const base = {
       exitAdmin: () => this.setState({ screen: "landing", adminSel: null }),
       backToList: () => this.setState({ screen: "admin", adminSel: null, replyJustSaved: false }),
-      statOpen: all.filter(x => !x.archived && x.status !== "answered").length,
-      statNew: all.filter(x => !x.archived && x.status === "new").length,
-      statDone: all.filter(x => !x.archived && x.status === "answered").length,
-      statArchived: all.filter(x => x.archived).length,
       search: s.search || "", setSearch: e => this.setState({ search: e.target.value }),
-      filters: filterDefs.map(([id, label]) => { const on = filter === id; return {
-        label, bg: on ? "#17231A" : "transparent", color: on ? "#F5F3EA" : "#4E5B51", border: on ? "#17231A" : "rgba(23,35,26,.15)",
-        set: () => this.setState({ filter: id }) }; }),
+      toolsOpen: !!s.toolsOpen, toolsLabel: s.toolsOpen ? "נתונים וייצוא ▲" : "נתונים וייצוא ▼",
+      toggleTools: () => this.setState({ toolsOpen: !s.toolsOpen }),
+      searchBorder: q ? "#2A6B44" : "rgba(23,35,26,.13)",
+      clearSearchDisplay: q ? "flex" : "none",
+      clearSearch: () => this.setState({ search: "" }),
+      menus: [
+        { key: "status", caption: "מצב", value: (filterDefs.find(([id]) => id === filter) || filterDefs[0])[1], active: filter !== "open",
+          items: filterDefs.map(([id, label]) => ({ id, label, n: counts[id], on: filter === id, apply: { filter: id } })) },
+        { key: "sol", caption: "פתרון", value: solFilter === "all" ? "הכול" : ((solOpts.find(o => o.id === solFilter) || {}).label || "הכול"), active: solFilter !== "all",
+          items: [{ id: "all", label: "כל הפתרונות", n: statusPool.length, on: solFilter === "all", apply: { solFilter: "all" } },
+            ...solOpts.map(o => ({ id: o.id, label: o.label, n: o.n, on: solFilter === o.id, apply: { solFilter: o.id } }))] },
+        { key: "cls", caption: "סיווג", value: clsFilter === "all" ? "הכול" : clsFilter, active: clsFilter !== "all",
+          items: [{ id: "all", label: "כל הסיווגים", n: statusPool.length, on: clsFilter === "all", apply: { clsFilter: "all" } },
+            ...clsOpts.map(o => ({ id: o.id, label: o.label, n: o.n, on: clsFilter === o.id, apply: { clsFilter: o.id } }))] }
+      ].map(mn => {
+        const open = s.openMenu === mn.key;
+        return { caption: mn.caption, value: mn.value, open, arrow: open ? "▲" : "▼",
+          bg: mn.active ? "#1D4E31" : "#FFFFFF", color: mn.active ? "#F5F3EA" : "#263029",
+          capColor: mn.active ? "rgba(245,243,234,.6)" : "#7C877E",
+          border: open ? "#2A6B44" : mn.active ? "#1D4E31" : "rgba(23,35,26,.13)",
+          toggle: () => this.setState({ openMenu: open ? null : mn.key }),
+          items: mn.items.map(it => ({ label: it.label, count: it.n, weight: it.on ? "700" : "500",
+            bg: it.on ? "#F0F6F1" : "transparent", color: it.on ? "#17231A" : "#4E5B51",
+            set: () => this.setState({ ...it.apply, openMenu: null, listReady: false }) })) };
+      }),
+      clearAllDisplay: (q || filter !== "open" || solFilter !== "all" || clsFilter !== "all") ? "inline-block" : "none",
+      clearFilters: () => this.setState({ search: "", filter: "open", solFilter: "all", clsFilter: "all", openMenu: null }),
+      resultNote: reqs.length === all.length ? "" : reqs.length + " מתוך " + all.length,
       dbNote: s.dbNote || (all.length + " בקשות נשמרות בדפדפן"), dbNoteColor: s.dbNote ? "#2A6B44" : "#7C877E",
       exportJson: () => { this.download("matzpen-requests-" + new Date().toISOString().slice(0, 10) + ".json", JSON.stringify(this.loadReqs(), null, 2), "application/json"); this.setState({ dbNote: "הקובץ יוצא" }); },
       exportCsv: () => {
-        const cols = ["id", "timestamp", "status", "name", "role", "team", "phone", "recommendation", "match", "product", "reply"];
+        const cols = ["id", "timestamp", "status", "name", "role", "team", "phone", "avnet", "recommendation", "match", "product", "reply"];
         const esc = v => '"' + String(v == null ? "" : v).replace(/"/g, '""') + '"';
-        const rows = this.loadReqs().map(x => [x.id, x.timestamp, x.status, x.user.name, x.user.role, x.user.team, x.user.phone, x.recommendation.name, x.recommendation.pct + "%", x.product.title, x.reply].map(esc).join(","));
+        const rows = this.loadReqs().map(x => [x.id, x.timestamp, x.status, x.user.name, x.user.role, x.user.team, x.user.phone, x.user.avnet || "", x.recommendation.name, x.recommendation.pct + "%", x.product.title, x.reply].map(esc).join(","));
         this.download("matzpen-requests-" + new Date().toISOString().slice(0, 10) + ".csv", [cols.join(","), ...rows].join("\n"), "text/csv;charset=utf-8");
         this.setState({ dbNote: "הקובץ יוצא" });
       },
@@ -606,33 +825,60 @@ class Component extends DCLogic {
         reader.readAsText(f); e.target.value = "";
       },
       seedDemo: () => this.seed(),
-      hasRequests: reqs.length > 0, noRequests: reqs.length === 0,
-      emptyTitle: q ? "לא נמצאו תוצאות" : filter === "archive" ? "הארכיון ריק" : "אין בקשות פתוחות",
-      emptyHint: q ? "נסו מונח חיפוש אחר." : "בקשות שיישלחו מהאתר יופיעו כאן. אפשר גם לטעון נתוני דמו.",
-      rows: reqs.map(x => { const m = this.statusMeta(x.status); const done = x.status === "answered"; return {
+      hasRequests: reqs.length > 0 && s.listReady !== false, noRequests: reqs.length === 0 && s.listReady !== false,
+      emptyTitle: (q || solFilter !== "all" || clsFilter !== "all") ? "לא נמצאו תוצאות" : filter === "archive" ? "הארכיון ריק" : "אין בקשות פתוחות",
+      emptyHint: (q || solFilter !== "all" || clsFilter !== "all") ? "נסו מונח אחר או נקו את הסינון." : "בקשות שיישלחו מהאתר יופיעו כאן. אפשר גם לטעון נתוני דמו.",
+      rows: reqs.map((x, i) => { const m = this.statusMeta(x.status); const done = x.status === "answered"; const flash = s.flashId === x.id; return {
+        delay: Math.min(i, 12) * 45 + "ms",
+        stLabel: m.label, stColor: m.color,
+        hasAction: !!x.archived || done,
+        cols: (x.archived || done) ? "auto 1fr auto auto" : "auto 1fr auto",
+        actionLabel: x.archived ? "↺ החזרה לתור" : "▤ לארכיון",
+        actionTitle: x.archived ? "הוצאה מהארכיון והחזרה לתור כבקשה חדשה" : "העברה לארכיון",
+        action: () => {
+          if (x.archived) this.patchReq(x.id, { archived: false, status: "new" });
+          else this.patchReq(x.id, { archived: true });
+          clearTimeout(this._flashT);
+          this.setState({ flashId: x.id, dbNote: x.archived ? "הבקשה הוחזרה לתור כבקשה חדשה" : "הבקשה הועברה לארכיון" });
+          this._flashT = setTimeout(() => this.setState({ flashId: null }), 620);
+        },
+        bg: flash ? m.flashBg : m.rowBg,
+        accentW: flash ? "8px" : "4px",
+        dotAnim: flash ? "dotPop .5s cubic-bezier(.3,1.4,.5,1) both" : "none",
+        labelAnim: flash ? "labelPop .34s ease both" : "none",
         id: x.id, name: x.user.name || "ללא שם", meta: [x.user.role, x.user.team].filter(Boolean).join(" · ") + " · " + new Date(x.timestamp).toLocaleDateString("he-IL"),
-        rec: x.recommendation.name, pct: x.recommendation.pct, stLabel: m.label, stBg: m.bg, stColor: m.color,
+        rec: x.recommendation.name, pct: x.recommendation.pct,
         cardBorder: done ? "rgba(23,35,26,.07)" : "rgba(23,35,26,.13)", opacity: x.archived ? "0.6" : "1",
-        checkBorder: done ? "#2A6B44" : "rgba(23,35,26,.28)", checkBg: done ? "#2A6B44" : "transparent", checkMark: done ? "✓" : "",
-        strike: done ? "line-through" : "none", archIcon: x.archived ? "↩" : "▤",
-        toggleDone: () => this.patchReq(x.id, { status: done ? "inprogress" : "answered" }),
-        toggleArchive: () => this.patchReq(x.id, { archived: !x.archived }),
-        remove: () => { const list = this.loadReqs().filter(y => y.id !== x.id); this.saveReqs(list); this.setState({ requests: list, dbNote: "הבקשה נמחקה" }); },
+        accent: x.archived ? "rgba(23,35,26,.12)" : m.accent,
+        checkTitle: m.next.title,
+        checkBorder: m.dotBorder, checkBg: m.dotBg, checkMark: m.dotMark,
+        strike: done ? "line-through" : "none",
+        toggleDone: () => {
+          this.patchReq(x.id, { status: m.next.to });
+          clearTimeout(this._flashT);
+          this.setState({ flashId: x.id });
+          this._flashT = setTimeout(() => this.setState({ flashId: null }), 620);
+        },
         open: () => this.setState({ screen: "adminDetail", adminSel: x.id, replyDraft: x.reply || "", replyJustSaved: false }) }; })
     };
     if (!r) return base;
     const m = this.statusMeta(r.status);
     return { ...base,
       dId: r.id, dStLabel: m.label, dStBg: m.bg, dStColor: m.color,
+      dArchIcon: r.archived ? "↩" : "▤", dArchTitle: r.archived ? "הוצאה מהארכיון" : "העברה לארכיון",
+      dToggleArchive: () => this.patchReq(r.id, { archived: !r.archived }),
+      dDownload: () => this.download(r.id + ".txt", this.requestText(r), "text/plain;charset=utf-8"),
+      dRemove: () => { const list = this.loadReqs().filter(y => y.id !== r.id); this.saveReqs(list); this.setState({ requests: list, screen: "admin", adminSel: null, dbNote: "הבקשה נמחקה" }); },
       dName: r.user.name || "ללא שם", dRole: r.user.role || "לא צוין", dTeam: r.user.team || "לא צוין", dPhone: r.user.phone || "לא צוין",
       dDate: new Date(r.timestamp).toLocaleDateString("he-IL") + " " + new Date(r.timestamp).toLocaleTimeString("he-IL", { hour: "2-digit", minute: "2-digit" }),
-      dRecName: r.recommendation.name, dRecPct: r.recommendation.pct, dRecPctW: r.recommendation.pct + "%",
-      dMatchLabel: r.recommendation.pct >= 80 ? "התאמה חזקה" : r.recommendation.pct >= 60 ? "התאמה טובה" : "התאמה חלקית",
-      dRecExplain: r.recommendation.desc + " " + r.recommendation.adv,
+      dRecName: r.recommendation.name, dRecPct: r.recommendation.pct,
       dWhy: r.why.length ? r.why : ["מבוסס על מכלול התשובות"],
       dAlts: r.alternatives.map((a, i) => ({ rank: ["01","02","03"][i], name: a.name, pct: a.pct, desc: a.desc, border: i === 0 ? "#2A6B44" : "rgba(23,35,26,.1)" })),
-      dProdTitle: r.product.title, dProdDesc: r.product.desc, dProdFeatures: r.product.features, dProdMvp: r.product.mvp,
-      dBrief: r.brief, dAnswers: r.answersLabeled,
+      dAnswers: r.answersLabeled,
+      dContactMeta: [r.user.role, r.user.team].filter(Boolean).join(" · ") || "לא צוינו פרטים נוספים",
+      dTelHref: r.user.phone ? "tel:" + r.user.phone.replace(/[^\d+]/g, "") : "#",
+      dAvnet: r.user.avnet || "", dHasAvnet: !!r.user.avnet,
+      dAvnetHref: r.user.avnet ? "tel:" + r.user.avnet.replace(/[^\d+]/g, "") : "#",
       dReply: s.replyDraft, setReply: e => this.setState({ replyDraft: e.target.value, replyJustSaved: false }),
       dReplySaved: !!(r.repliedAt && s.replyJustSaved),
       dRepliedAt: r.repliedAt ? new Date(r.repliedAt).toLocaleDateString("he-IL") : "",
@@ -688,7 +934,7 @@ class Component extends DCLogic {
     const frames = PH.map(p => wave(p, 1));
     const framesGhost = PH.map(p => wave(p + 0.9, 0.6));
     const setF = k => e => this.setState({ form: { ...s.form, [k]: e.target.value }, formErr: false });
-    const restart = () => this.setState({ screen: "landing", answers: {}, idx: 0, sel: null, reqId: null, formErr: false, form: { name: "", role: "", team: "", phone: "" } });
+    const restart = () => this.setState({ screen: "landing", answers: {}, idx: 0, sel: null, reqId: null, formErr: false, form: { name: "", role: "", team: "", phone: "", avnet: "" } });
     return {
       isLanding: s.screen === "landing", isQuiz, isDetails: s.screen === "details", isSubmitted: s.screen === "submitted",
       isAdminList: s.screen === "admin", isAdminDetail: s.screen === "adminDetail",
@@ -727,18 +973,20 @@ class Component extends DCLogic {
       waveRef: el => {
         if (!el || this._waveEl === el) return;
         this._waveEl = el;
-        const measure = () => { const w = Math.round(el.clientWidth - 80); if (w > 0 && w !== this.state.waveW) this.setState({ waveW: w }); };
+        const measure = () => { const w = Math.round(el.clientWidth - 80); const vw = window.innerWidth; const p = {}; if (w > 0 && w !== this.state.waveW) p.waveW = w; if (vw !== this.state.vw) p.vw = vw; if (Object.keys(p).length) this.setState(p); };
         measure();
         if (!this._onResize) { this._onResize = () => this._waveEl && measure(); window.addEventListener("resize", this._onResize); }
       },
       qAnim: s.qPhase === "out" ? "qOut .2s ease-in both" : "qIn .42s cubic-bezier(.2,.8,.3,1) both",
       options,
       backColor: s.idx > 0 ? "#17231A" : "rgba(23,35,26,.3)", backCursor: s.idx > 0 ? "pointer" : "default",
-      nextBg: hasSel && dateReady ? "#17231A" : "rgba(23,35,26,.22)", nextCursor: hasSel && dateReady ? "pointer" : "default",
-      nextShadow: hasSel && dateReady ? "0 4px 0 #2A6B44" : "none",
+      nextBg: hasSel && dateReady ? "#1D4E31" : "rgba(23,35,26,.22)", nextCursor: hasSel && dateReady ? "pointer" : "default",
+      nextShadow: hasSel && dateReady ? "0 4px 0 #17231A" : "none",
       nextLabel: isRank && rankSel.length === 0 ? "דילוג ←" : queue.length && s.idx >= queue.length - 1 ? "סיימנו ←" : "המשך ←",
       showDate, dateVal: dueDate, dateNote, dateNoteColor: dueDate ? "#2A6B44" : "#7C877E",
-      setDate: e => this.setState({ dueDate: e.target.value, sel: dateIds[0] || s.sel }),
+      dateBtnLabel: dueDate ? new Date(dueDate + "T00:00").toLocaleDateString("he-IL", { day: "numeric", month: "long", year: "numeric" }) : "בחרו תאריך",
+      dateBtnColor: dueDate ? "#17231A" : "#7C877E",
+      ...this.calVals(dueDate, dateIds),
       hasDateOpt: !!dateOpt,
       dateOptLabel: dateOpt ? dateOpt.label : "",
       dateOptPick: () => dateOpt && this.setState({ sel: dateOpt.id }),
@@ -776,8 +1024,8 @@ class Component extends DCLogic {
       }) : [],
       goBack: () => { if (s.idx > 0) { const prev = queue[s.idx - 1]; this.stepTo(s.idx - 1, s.answers[prev.id] || (prev.kind === "rank" || prev.kind === "multi" ? [] : null)); } },
       goNext: () => { if (!hasSel || !dateReady || !q) return; const answers = { ...s.answers, [q.id]: s.sel }; this.setState({ answers }, () => this.finishOrNext(answers, s.idx + 1)); },
-      formName: s.form.name, formRole: s.form.role, formTeam: s.form.team, formPhone: s.form.phone,
-      setName: setF("name"), setRole: setF("role"), setTeam: setF("team"), setPhone: setF("phone"),
+      formName: s.form.name, formRole: s.form.role, formTeam: s.form.team, formPhone: s.form.phone, formAvnet: s.form.avnet || "",
+      setName: setF("name"), setRole: setF("role"), setTeam: setF("team"), setPhone: setF("phone"), setAvnet: setF("avnet"),
       nameBorder: s.formErr ? "#A8341A" : "rgba(23,35,26,.15)", formErr: s.formErr,
       submit: () => {
         if (!s.form.name.trim()) return this.setState({ formErr: true });
